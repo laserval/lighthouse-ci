@@ -24,18 +24,15 @@ Lighthouse CI comes with an automatic pipeline, called `autorun`, that should wo
 **.travis.yml**
 
 ```yaml
-# xenial (the default) or newer required
 language: node_js
-node_js:
-  - 10 # Node 10 LTS or later required
 addons:
-  chrome: stable # make sure to have Chrome available
+  chrome: stable
 before_install:
-  - npm install -g @lhci/cli@0.3.0-alpha.0 # install LHCI
+  - npm install -g @lhci/cli
 script:
-  - npm run build # build your site
-  - npm test # run your normal tests
-  - lhci autorun # run lighthouse CI against your static site
+  - npm run build  # build site
+  - npm test       # run typical tests
+  - lhci autorun --url="http://localhost"  # run lighthouse CI 
 ```
 
 That's it! With this in place, you'll have Lighthouse reports collected and and asserted.
