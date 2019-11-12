@@ -69,7 +69,12 @@ function createRouter(context) {
   router.get(
     '/:projectId/builds',
     handleAsyncError(async (req, res) => {
-      const builds = await context.storageMethod.getBuilds(req.params.projectId, req.query);
+      const options = {
+        branch: req.query.branch,
+        hash: req.query.hash,
+        limit: parseInt(req.query.limit),
+      };
+      const builds = await context.storageMethod.getBuilds(req.params.projectId, options);
       res.json(builds);
     })
   );
